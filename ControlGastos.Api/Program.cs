@@ -1,4 +1,22 @@
+using ControlGastos.Api.Data;
+using ControlGastos.Api.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<AppDbContext>(options =>
+        options.UseSqlServer(connectionString));
+
+builder.Services
+    .AddIdentityCore<Usuario>()
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<AppDbContext>();
+
+// Authentication / Authorization
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
 
 // Add services to the container.
 
@@ -15,6 +33,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseAuthorization();
 
