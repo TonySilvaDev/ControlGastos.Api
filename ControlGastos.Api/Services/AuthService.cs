@@ -70,7 +70,7 @@ namespace ControlGastos.Api.Services
                 Email = usuario.Email
             };
 
-            return (true, "LoginCOrrecto", datos);
+            return (true, "LoginCorrecto", datos);
         }
     }
 }

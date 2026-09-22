@@ -17,6 +17,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services
     .AddIdentityCore<Usuario>()
     .AddRoles<IdentityRole>()
+    .AddSignInManager()
     .AddEntityFrameworkStores<AppDbContext>();
 
 // Authentication / Authorization
@@ -30,6 +31,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 
 builder.Services.AddScoped<ICategoriaService, CategoriaService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
