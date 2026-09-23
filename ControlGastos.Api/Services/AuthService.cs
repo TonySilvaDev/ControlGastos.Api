@@ -9,11 +9,13 @@ namespace ControlGastos.Api.Services
     {
         private readonly UserManager<Usuario> _userManager;
         private readonly SignInManager<Usuario> _signInManager;
+        private readonly ITokenService _tokenService;
 
-        public AuthService(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager)
+        public AuthService(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, ITokenService tokenService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _tokenService = tokenService;
         }        
 
         public async Task<(bool Exitoso, string Mensaje, AuthResponseDto? Datos)> RegistrarAsync(RegistrarDto registrarDto)
@@ -64,10 +66,13 @@ namespace ControlGastos.Api.Services
                 return (false, "Correo o contraseña incorrectos", null);
             }
 
+            var token = await _tokenService.CreateTokenAsync(usuario);
+
             var datos = new AuthResponseDto
             {
                 UsuarioId = usuario.Id,
-                Email = usuario.Email
+                Email = usuario.Email!,
+                Token = token
             };
 
             return (true, "LoginCorrecto", datos);
