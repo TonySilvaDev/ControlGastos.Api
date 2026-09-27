@@ -22,26 +22,51 @@ namespace ControlGastos.Api.Repositories
                         .ToListAsync();
         }
 
-        public Task ActualizarAsync(Categoria categoria)
+        public async Task ActualizarAsync(Categoria categoria)
         {
-            throw new NotImplementedException();
+            _context.Categorias.Update(categoria);
+
+            await _context.SaveChangesAsync();
         }
 
-        public Task<Categoria> CrearAsync(Categoria categoria)
+        public async Task<Categoria> CrearAsync(Categoria categoria)
         {
-            throw new NotImplementedException();
+            _context.Categorias.Add(categoria);
+
+            await _context.SaveChangesAsync();
+
+            return categoria;
         }
 
-        public Task EliminarAsync(Categoria categoria)
+        public async Task EliminarAsync(Categoria categoria)
         {
-            throw new NotImplementedException();
+            _context.Categorias.Remove(categoria);
+
+            await _context.SaveChangesAsync();
         }
 
-        public Task<Categoria> ObtenerPorIdAsync(int id, string usuarioId)
+        public async Task<Categoria?> ObtenerPorIdAsync(int id, string usuarioId)
         {
-            throw new NotImplementedException();
+            return await _context.Categorias
+                        .FirstOrDefaultAsync(x =>
+                            x.Id == id &&
+                            x.UsuarioId == usuarioId
+                        );
         }
 
-        
+        public async Task<Categoria?> ObtenerPorNombreAsync(string nombre, string usuarioId)
+        {
+            return await _context.Categorias
+                        .FirstOrDefaultAsync(x =>
+                            x.UsuarioId == usuarioId &&
+                            x.Nombre.ToLower() == nombre.ToLower()
+                        );
+        }
+
+        public async Task<bool> TieneGastosAsync(int categoriaId)
+        {
+            return await _context.Gastos
+                        .AnyAsync(x => x.CategoriaId == categoriaId);
+        }
     }
 }
