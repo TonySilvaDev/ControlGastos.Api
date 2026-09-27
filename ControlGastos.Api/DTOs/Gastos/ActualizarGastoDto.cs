@@ -17,5 +17,8 @@ namespace ControlGastos.Api.DTOs.Gastos
 
         [Required]
         public int CategoriaId { get; set; }
+
+        [Required]
+        public int TipoOperacionId { get; set; }
     }
 }

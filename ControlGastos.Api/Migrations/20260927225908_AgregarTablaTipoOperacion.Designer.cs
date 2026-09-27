@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ControlGastos.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260927223818_AgregarTablaTipoOperacion")]
+    [Migration("20260927225908_AgregarTablaTipoOperacion")]
     partial class AgregarTablaTipoOperacion
     {
         /// <inheritdoc />
@@ -101,7 +101,7 @@ namespace ControlGastos.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TipoOperacion");
+                    b.ToTable("TiposOperacion");
                 });
 
             modelBuilder.Entity("ControlGastos.Api.Models.Usuario", b =>
@@ -324,7 +324,7 @@ namespace ControlGastos.Api.Migrations
                     b.HasOne("ControlGastos.Api.Models.TipoOperacion", "TipoOperacion")
                         .WithMany("Gastos")
                         .HasForeignKey("TipoOperacionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("ControlGastos.Api.Models.Usuario", "Usuario")

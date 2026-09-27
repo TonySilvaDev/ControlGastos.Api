@@ -57,6 +57,7 @@ namespace ControlGastos.Api.Services
                 Descripcion = dto.Descripcion,
                 Fecha = dto.Fecha,
                 CategoriaId = dto.CategoriaId,
+                TipoOperacionId = dto.TipoOperacionId,
                 UsuarioId = usuarioId
             };
 
@@ -95,6 +96,7 @@ namespace ControlGastos.Api.Services
             gasto.Descripcion = dto.Descripcion;
             gasto.Fecha = dto.Fecha;
             gasto.CategoriaId = dto.CategoriaId;
+            gasto.TipoOperacionId = dto.TipoOperacionId;
             gasto.Categoria = categoria;
 
             await _gastoRepository.ActualizarAsync(gasto);
@@ -128,7 +130,8 @@ namespace ControlGastos.Api.Services
                 Descripcion = gasto.Descripcion,
                 Fecha = gasto.Fecha,
                 CategoriaId = gasto.CategoriaId,
-                CategoriaNombre = gasto.Categoria.Nombre
+                CategoriaNombre = gasto.Categoria.Nombre,
+                TipoOperacionId = gasto.TipoOperacionId
             };
         }
     }

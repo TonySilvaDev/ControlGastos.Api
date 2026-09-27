@@ -98,7 +98,7 @@ namespace ControlGastos.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TipoOperacion");
+                    b.ToTable("TiposOperacion");
                 });
 
             modelBuilder.Entity("ControlGastos.Api.Models.Usuario", b =>
@@ -321,7 +321,7 @@ namespace ControlGastos.Api.Migrations
                     b.HasOne("ControlGastos.Api.Models.TipoOperacion", "TipoOperacion")
                         .WithMany("Gastos")
                         .HasForeignKey("TipoOperacionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("ControlGastos.Api.Models.Usuario", "Usuario")

@@ -1,4 +1,6 @@
-﻿namespace ControlGastos.Api.DTOs.Gastos
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ControlGastos.Api.DTOs.Gastos
 {
     public class GastoDto
     {
@@ -8,5 +10,6 @@
         public DateTime Fecha { get; set; }
         public int CategoriaId { get; set; }
         public string CategoriaNombre { get; set; } = string.Empty;
+        public int TipoOperacionId { get; set; }
     }
 }

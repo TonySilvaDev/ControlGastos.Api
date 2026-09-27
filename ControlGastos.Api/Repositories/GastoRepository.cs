@@ -18,6 +18,7 @@ namespace ControlGastos.Api.Repositories
         {
             return await _context.Gastos
                 .Include(g => g.Categoria)
+                .Include(g => g.TipoOperacion)
                 .Where(g => g.UsuarioId == usuarioId)
                 .OrderByDescending(g => g.Fecha)
                 .ToListAsync();
@@ -27,6 +28,7 @@ namespace ControlGastos.Api.Repositories
         {
             return await _context.Gastos
                 .Include(g => g.Categoria)
+                .Include(g => g.TipoOperacion)
                 .FirstOrDefaultAsync(g =>
                     g.Id == id &&
                     g.UsuarioId == usuarioId);

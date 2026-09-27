@@ -18,7 +18,7 @@ namespace ControlGastos.Api.Migrations
                 defaultValue: 0);
 
             migrationBuilder.CreateTable(
-                name: "TipoOperacion",
+                name: "TiposOperacion",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -27,7 +27,7 @@ namespace ControlGastos.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TipoOperacion", x => x.Id);
+                    table.PrimaryKey("PK_TiposOperacion", x => x.Id);
                 });
 
             migrationBuilder.CreateIndex(
@@ -36,23 +36,23 @@ namespace ControlGastos.Api.Migrations
                 column: "TipoOperacionId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Gastos_TipoOperacion_TipoOperacionId",
+                name: "FK_Gastos_TiposOperacion_TipoOperacionId",
                 table: "Gastos",
                 column: "TipoOperacionId",
-                principalTable: "TipoOperacion",
+                principalTable: "TiposOperacion",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Gastos_TipoOperacion_TipoOperacionId",
+                name: "FK_Gastos_TiposOperacion_TipoOperacionId",
                 table: "Gastos");
 
             migrationBuilder.DropTable(
-                name: "TipoOperacion");
+                name: "TiposOperacion");
 
             migrationBuilder.DropIndex(
                 name: "IX_Gastos_TipoOperacionId",

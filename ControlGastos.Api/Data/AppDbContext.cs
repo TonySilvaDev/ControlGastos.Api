@@ -13,6 +13,7 @@ namespace ControlGastos.Api.Data
 
         public DbSet<Gasto> Gastos { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<TipoOperacion> TiposOperacion { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -34,6 +35,12 @@ namespace ControlGastos.Api.Data
                 .HasOne(g => g.Categoria)
                 .WithMany(c => c.Gastos)
                 .HasForeignKey(g => g.CategoriaId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Gasto>()
+                .HasOne(g => g.TipoOperacion)
+                .WithMany(t => t.Gastos)
+                .HasForeignKey(g => g.TipoOperacionId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
