@@ -10,5 +10,7 @@
         public string UsuarioId { get; set; } = string.Empty;
         public Categoria Categoria { get; set; } = null!;
         public Usuario Usuario { get; set; } = null!;
+        public int TipoOperacionId { get; set; }
+        public TipoOperacion TipoOperacion { get; set; }
     }
 }
